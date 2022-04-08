@@ -27,6 +27,27 @@
 
      }
 
+     // If No Errors Send Email
+
+     $OurEmail = 'example@example.com';
+     $Subject = 'Feedback';
+     $headers = 'From : '.$email.'\r\n';
+
+     if (empty($formErrors)) {
+
+      mail($OurEmail,$Subject,$msg, $headers);
+
+      // Unset variables when successfully send the mail
+      $user = '' ;
+      $email = '' ;
+      $cell = '' ;
+      $msg = '' ;
+     }
+
+     // Success Alert
+
+     $success = "<div class='alert alert-success' >We Have Recived Your Message !</div>";
+
   }
 
 
@@ -49,6 +70,7 @@
   <script src="js/script.js" ></script>
 
 </head>
+
 <body>
 <!-- Start Form -->
 
@@ -66,9 +88,10 @@
         ?>
         </div>
         <?php }?>
+        <?php if (isset($success)) { echo $success; }?>
 
         <div class="form-group">
-          <input class="form-control" type="text" name="username" placeholder="Enter username" value="<?php if (isset($user)) { echo $user;} ?>">
+          <input class="user form-control" type="text" name="username" placeholder="Enter username" value="<?php if (isset($user)) { echo $user;} ?>">
           <i class="fa fa-user fa-fw"></i>
           <span class='star' >*</span>
           <div class="alert alert-danger custom-alert">
@@ -77,7 +100,7 @@
         </div>
 
         <div class="form-group">
-          <input class="form-control" type="email" name="email" placeholder="Enter email" value="<?php if (isset($email)) { echo $email;} ?>">
+          <input class="email form-control" type="email" name="email" placeholder="Enter email" value="<?php if (isset($email)) { echo $email;} ?>">
           <i class="fa fa-envelope fa-fw"></i>
           <span class='star' >*</span>
           <div class="alert alert-danger custom-alert">
@@ -86,7 +109,7 @@
         </div>
         
         <div class="form-group">
-          <input class="form-control" type="text" name="phone" placeholder="Enter phone number" value="<?php if (isset($cell)) { echo $cell;} ?>">
+          <input class="cell form-control" type="text" name="phone" placeholder="Enter phone number" value="<?php if (isset($cell)) { echo $cell;} ?>">
           <i class="fas fa-phone-alt fa-fw"></i>
           <div class="alert alert-danger custom-alert">
             Phone must be <strong>10</strong> numbers
@@ -94,7 +117,7 @@
         </div>
 
         <div class="form-group">
-          <textarea class="form-control" placeholder="Enter your message" name="message"><?php if (isset($msg)) { echo $msg;} ?></textarea>
+          <textarea class="msg form-control" placeholder="Enter your message" name="message"><?php if (isset($msg)) { echo $msg;} ?></textarea>
           <span class='star' >*</span>
           <div class="alert alert-danger custom-alert">
             Message can't be <strong>empty</strong>

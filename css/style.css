@@ -49,6 +49,7 @@ form textarea {
 
 .custom-alert {
     padding: 5px 10px;
+    display: none;
 }
 
 #send-icon {
